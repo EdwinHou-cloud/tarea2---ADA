@@ -61,11 +61,27 @@ def Ventas_Refrescos():
         # Leer la cantidad vendida y el precio de cada producto
         for i in range(len(productos)):
             print(f"\nProducto: {productos[i]}")
-            ventas[i] = int(input("Ingrese la cantidad vendida (máximo 300): "))
-            while ventas[i] > 300:
-                print("La cantidad vendida no puede ser mayor a 300.")
-                ventas[i] = int(input("Ingrese la cantidad vendida (máximo 300): "))
-            precios[i] = float(input("Ingrese el precio del producto: "))
+            while True:
+                try:
+                    ventas[i] = int(input("Ingrese la cantidad vendida (máximo 300): "))
+                    if ventas[i] < 0:
+                        print("La cantidad vendida no puede ser negativa.")
+                        continue
+                    if ventas[i] > 300:
+                        print("La cantidad vendida no puede ser mayor a 300.")
+                        continue
+                    break
+                except ValueError:
+                    print("Error, el valor es incorrecto. Intente nuevamente.")
+            while True:
+                try:
+                    precios[i] = float(input("Ingrese el precio del producto: "))
+                    if precios[i] <= 0:
+                        print("El precio no puede ser negativo o cero.")
+                        continue
+                    break
+                except ValueError:
+                    print("Error, el valor es incorrecto. Intente nuevamente.")
 
         # Calcular las ventas totales de cada producto
         for i in range(len(productos)):
@@ -88,7 +104,7 @@ def Ventas_Refrescos():
             print("\nAnimo, pronto lo lograras")
     
     except ValueError:
-        print("Error: Ingrese una cantidad válida de productos.")
+        print("Error, el valor es incorrecto")
 
 def Pagos_Hipoteca():
     try:
